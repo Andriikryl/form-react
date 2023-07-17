@@ -25,20 +25,39 @@ export const Form = () => {
       <form
         onSubmit={e => e.preventDefault()}
         noValidate
+        autoComplete="off"
         className="container"
       >
         <div className="grid gap-5 md:grid-cols-2">
           <Input
             label="name"
+            name="name"
             type="text"
             id="name"
             placeholder="type your name..."
+            validation={{
+              required: {
+                value: true,
+                message: 'required',
+              },
+            }}
           />
           <Input
             label="password"
+            name="password"
             type="password"
             id="password"
             placeholder="type your password..."
+            validation={{
+              required: {
+                value: true,
+                message: 'required',
+              },
+              minLength: {
+                value: 6,
+                message: 'min 6 characters',
+              },
+            }}
           />
         </div>
         <div className="mt-5">

@@ -7,13 +7,13 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { MdError } from 'react-icons/md'
 
 
-export const Input = ({ label, type, id, placeholder }) => {
+export const Input = ({ label, type, id, placeholder, validation, name }) => {
   const {
     register,
     formState: { errors },
   } = useFormContext()
 
-  const inputError = findInputError(errors, label)
+  const inputError = findInputError(errors, name)
   const isInvalid = isFormInvalid(inputError)
 
   return (
@@ -36,12 +36,7 @@ export const Input = ({ label, type, id, placeholder }) => {
         type={type}
         className="w-full p-5 font-medium border rounded-md border-slate-300 placeholder:opacity-60"
         placeholder={placeholder}
-        {...register(label, {
-          required: {
-            value: true,
-            message: 'required',
-          },
-        })}
+        {...register(name, validation)}
       />
     </div>
   )
