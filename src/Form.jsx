@@ -12,13 +12,48 @@ import {
 import { useState } from 'react'
 import { GrMail } from 'react-icons/gr'
 import { BsFillCheckSquareFill } from 'react-icons/bs'
-
 export const Form = () => {
   const methods = useForm()
 
   const onSubmit = methods.handleSubmit(data => {
     console.log(data)
   })
+
+  const name_validation = {
+    name: 'name',
+    label: 'name',
+    type: 'text',
+    id: 'name',
+    placeholder: 'write your name ...',
+    validation: {
+      required: {
+        value: true,
+        message: 'required',
+      },
+      maxLength: {
+        value: 30,
+        message: '30 characters max',
+      },
+    },
+  }
+
+  const password_validation = {
+    name: 'password',
+    label: 'password',
+    type: 'password',
+    id: 'password',
+    placeholder: 'type password ...',
+    validation: {
+      required: {
+        value: true,
+        message: 'required',
+      },
+      minLength: {
+        value: 6,
+        message: 'min 6 characters',
+      },
+    },
+  }
 
   return (
     <FormProvider {...methods}>
@@ -29,36 +64,8 @@ export const Form = () => {
         className="container"
       >
         <div className="grid gap-5 md:grid-cols-2">
-          <Input
-            label="name"
-            name="name"
-            type="text"
-            id="name"
-            placeholder="type your name..."
-            validation={{
-              required: {
-                value: true,
-                message: 'required',
-              },
-            }}
-          />
-          <Input
-            label="password"
-            name="password"
-            type="password"
-            id="password"
-            placeholder="type your password..."
-            validation={{
-              required: {
-                value: true,
-                message: 'required',
-              },
-              minLength: {
-                value: 6,
-                message: 'min 6 characters',
-              },
-            }}
-          />
+          <Input {...name_validation} />
+          <Input {...password_validation} />
         </div>
         <div className="mt-5">
           <button
